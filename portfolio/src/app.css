@@ -1,0 +1,64 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-wrap: pretty;
+
+  --primary-color-dark: #38b263;
+  --primary-color-light: #38b263;
+
+  --accent-color-light: #dc6f60;
+  --accent-color-dark: #9f3123;
+
+  --background-color-dark: #050a07;
+  /* --background-color-dark: #0b160f; */
+  --background-color-light: #f5faf7;
+
+  --text-color-dark: #f1f8f3;
+  --text-color-light: #070e09;
+
+  --projects-card-background-light: #ecf3f3;
+  --projects-card-background-dark: #091110;
+
+  --github-button-bg-color-light: #dae6ea;
+
+  --github-button-bg-color-dark: #111e23;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+}
+
+body.dark {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+/* --emerald-50: #f2fbf3;
+--emerald-100: #e0f8e4;
+--emerald-200: #c3efcb;
+--emerald-300: #94e1a3;
+--emerald-400: #4ac462;
+--emerald-500: #38af50;
+--emerald-600: #29903e;
+--emerald-700: #237234;
+--emerald-800: #205b2d;
+--emerald-900: #1c4b27;
+--emerald-950: #0a2912;
+ */
