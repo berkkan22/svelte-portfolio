@@ -5,7 +5,7 @@
 
   let menu: Record<string, string> = {
     home: "Home",
-    projects: "My Projects",
+    "my-projects": "My Projects",
     // skills: "Skills",
     // education: "Education",
     // about: "More about me",
@@ -205,6 +205,7 @@
     align-items: center;
     padding: 24px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
   }
 
   .menu-content.dark {

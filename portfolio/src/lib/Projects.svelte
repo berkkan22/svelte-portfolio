@@ -58,7 +58,7 @@
     ),
     new Project(
       "WC Warteliste",
-      "This was a project which I did in my school for my school. It is a application to manage the waiting list for the restrom on the Abitur exams.",
+      "This was a project which I did in my school for my school. It is an application to manage the waiting list for the restroom on the Abitur exams.",
       [new Technology("JavaScript", "#FFFF00", "#000000"), new Technology("Electron", "#1B1C26", "#FFFFFF")],
       "./projects/wc-warteliste.png",
       "WC Warteliste",
@@ -276,7 +276,6 @@
   #links {
     display: flex;
     justify-content: flex-end;
-
   }
 
   #links a {
