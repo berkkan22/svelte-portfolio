@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "build-gh": "vite build --base=/svelte-portfolio",
     "preview": "vite preview",
@@ -20,6 +20,7 @@
     "vite": "^5.1.0"
   },
   "dependencies": {
-    "@sveltejs/adapter-static": "^3.0.1"
+    "@sveltejs/adapter-static": "^3.0.1",
+    "svelte-typewriter": "^3.2.3"
   }
 }

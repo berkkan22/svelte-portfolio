@@ -2,11 +2,9 @@
   import Navigation from "./lib/components/Navigation.svelte";
   import Hero from "./lib/Hero.svelte";
   import Projects from "./lib/Projects.svelte";
+  import Skills from "./lib/Skills.svelte";
   import themeColor from "./lib/storeTheme";
   import "./app.css";
-  import { onMount } from "svelte";
-
-  let isScrolling = false;
 </script>
 
 <main class={$themeColor}>
@@ -19,9 +17,15 @@
   <section class="anchor" id="my-projects">
     <Projects />
   </section>
+
+  <section class="anchor" id="skills">
+    <Skills />
+  </section>
 </main>
 
 <style>
+  /* ========================== */
+
   .anchor::before {
     content: "";
     display: block;
@@ -33,5 +37,4 @@
   main {
     margin-bottom: 200px;
   }
-
 </style>

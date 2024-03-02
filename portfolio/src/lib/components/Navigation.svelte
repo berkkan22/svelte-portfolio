@@ -6,7 +6,7 @@
   let menu: Record<string, string> = {
     home: "Home",
     "my-projects": "My Projects",
-    // skills: "Skills",
+    skills: "Skills",
     // education: "Education",
     // about: "More about me",
   };
@@ -33,6 +33,17 @@
   function showMenu(): any {
     isShowMenu = !isShowMenu;
   }
+
+  function handleAnchorClick(event: any) {
+    event.preventDefault();
+    const link = event.currentTarget;
+    const anchorId = new URL(link.href).hash.replace("#", "");
+    const anchor = document.getElementById(anchorId);
+    window.scrollTo({
+      top: anchor ? anchor.offsetTop : 0,
+      behavior: "smooth",
+    });
+  }
 </script>
 
 <!-- Navigation Bar -->
@@ -43,8 +54,12 @@
   <div class="right">
     <nav>
       {#each Object.keys(menu) as key}
-        <a class={$themeColor} href={"#" + key} class:active={activeLink === key} on:click={() => setActiveLink(key)}
-          >{menu[key]}</a
+        <a
+          class={$themeColor}
+          href={"#" + key}
+          class:active={activeLink === key}
+          on:click={() => setActiveLink(key)}
+          on:click={handleAnchorClick}>{menu[key]}</a
         >
       {/each}
     </nav>
