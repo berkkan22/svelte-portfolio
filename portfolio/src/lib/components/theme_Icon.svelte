@@ -1,18 +1,18 @@
 <script lang="ts">
-  import moon from "../../assets/moon.png";
-  import sun from "../../assets/sun.png";
-  import themeColor, {storeThemes} from '../storeTheme';
+  import moon from "/images/moon.png";
+  import sun from "/images/sun.png";
+  import themeColor, { storeThemes } from "../storeTheme";
 
   let darkMode: boolean = false;
   let themeIcon: string = darkMode ? sun : moon;
 
   function toggleDarkMode() {
-    if($themeColor === "dark") {
-			storeThemes.update((themeColor) => "light");
-		} else {
-			storeThemes.update((themeColor) => "dark");
-		}
-    window.document.body.classList.toggle('dark')
+    if ($themeColor === "dark") {
+      storeThemes.update((themeColor) => "light");
+    } else {
+      storeThemes.update((themeColor) => "dark");
+    }
+    window.document.body.classList.toggle("dark");
     darkMode = !darkMode;
     console.log(darkMode);
     themeIcon = darkMode ? sun : moon;
@@ -45,8 +45,6 @@
   .dark-light-btn.dark {
     color: #ff0000;
   }
-
-
 
   @media (max-width: 800px) {
     .dark-light-btn {

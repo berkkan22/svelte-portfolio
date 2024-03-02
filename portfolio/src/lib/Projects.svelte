@@ -50,7 +50,7 @@
       "Pubspec dependency inspector",
       "This is a VSCode extension that helps you to inspect the dependencies of your flutter project.",
       [new Technology("TypeScript", "#2cceff", "#000000")],
-      "./projects/vscode-extension.png",
+      "/images/projects/vscode-extension.png",
       "Pubspec dependency inspector",
       "--text-color-dark",
       "https://marketplace.visualstudio.com/items?itemName=berkkan.pubspec-dependency-inspector",
@@ -60,7 +60,7 @@
       "WC Warteliste",
       "This was a project which I did in my school for my school. It is an application to manage the waiting list for the restroom on the Abitur exams.",
       [new Technology("JavaScript", "#FFFF00", "#000000"), new Technology("Electron", "#1B1C26", "#FFFFFF")],
-      "./projects/wc-warteliste.png",
+      "/images/projects/wc-warteliste.png",
       "WC Warteliste",
       "--text-color-light",
       "",
@@ -69,7 +69,7 @@
     new Project(
       "Bachelor Thesis - AVSS",
       "This was my bachelor thesis. The goal of this thesis was to create a real-time preprocessing module for audio-visual speech separation. At the end I got a working model which can separate the speech from the background noise. But not as expected. Read more in the thesis.",
-      [new Technology("TypeScript", "#2cceff", "#000000")],
+      [new Technology("Python", "rgb(255 12 12)", "#FFFFFF")],
       "",
       "",
       "--text-color-dark",
@@ -110,8 +110,8 @@
             />
           </div>
         {/if}
-        <p id="title">{project.title}</p>
-        <p id="description">{project.description}</p>
+        <p class={$themeColor} id="title">{project.title}</p>
+        <p class={$themeColor} id="description">{project.description}</p>
         <div id="technologies" class={$themeColor}>
           {#each project.technologies as tech}
             <!-- <p style="background-color: {tech.color}">{tech.name}</p> -->
@@ -242,15 +242,23 @@
     color: var(--text-color-light);
   }
 
+  #title.dark {
+    color: var(--text-color-dark);
+  }
+
   #description {
     margin-bottom: 24px;
     line-height: 1.5;
-
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--text-color-light);
+  }
+
+  #description.dark {
+    color: var(--text-color-dark);
   }
 
   #technologies {
