@@ -110,7 +110,7 @@
             />
           </div>
         {/if}
-        <p class={$themeColor} id="title">{project.title}</p>
+        <h3 class={$themeColor} id="title">{project.title}</h3>
         <p class={$themeColor} id="description">{project.description}</p>
         <div id="technologies" class={$themeColor}>
           {#each project.technologies as tech}

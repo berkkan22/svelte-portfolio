@@ -5,6 +5,7 @@
   import github_logo_light from "/images/github.png";
   import github_logo_dark from "/images/github-mark.png";
   import gmail from "/images/gmail-icon.png";
+  import linkedIn from "/images/linkedin-icon.svg";
   import themeColor from "./storeTheme";
   import "../app.css";
 
@@ -51,6 +52,9 @@
         </a>
         <a href="mailto:berkkan22@gmail.com">
           <img id="gmail" src={gmail} alt="Gmail" />
+        </a>
+        <a href="https://www.linkedin.com/in/berkkan-katirci-6b2946300/" target="_blank">
+          <img id="linkedin" src={linkedIn} alt="LinkedIn" />
         </a>
       </div>
     </div>
