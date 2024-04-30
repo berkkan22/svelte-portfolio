@@ -76,6 +76,16 @@
       "",
       "https://github.com/berkkan22/audio-visual-speech-separation"
     ),
+    new Project(
+      "Website for Jugendtreff",
+      "This is a website for out local youth club. It is a simple website with a few pages.",
+      [new Technology("Svelte", "#FF3E00", "#FFFFFF")],
+      "/images/projects/jugendtreff.png",
+      "Jugendtreff",
+      "--text-color-light",
+      "https://gnc.berkkan.de",
+      ""
+    ),
   ];
 </script>
 
@@ -88,7 +98,6 @@
           <a href={project.demoLink} target="_blank">
             <div class="image">
               <img src={project.image} alt={project.imageAlt} />
-
               {#if project.imageOverlayColor == "--text-color-dark"}
                 <p style="color: var({project.imageOverlayColor})">View Demo</p>
               {:else}
