@@ -4,6 +4,7 @@
   import Projects from "./lib/Projects.svelte";
   import Skills from "./lib/Skills.svelte";
   import themeColor from "./lib/storeTheme";
+  import Footer from "./lib/components/Footer.svelte";
   import "./app.css";
 </script>
 
@@ -53,6 +54,8 @@
   </section>
 </main>
 
+<Footer />
+
 <style>
   /* ========================== */
 
@@ -65,6 +68,6 @@
   }
 
   main {
-    margin-bottom: 200px;
+    margin-bottom: 100px;
   }
 </style>

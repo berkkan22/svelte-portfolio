@@ -44,7 +44,7 @@
     flex-direction: column;
     align-items: center;
     margin: 24px;
-    margin-bottom: 100px;
+    margin-bottom: 24px;
   }
 
   h2 {
