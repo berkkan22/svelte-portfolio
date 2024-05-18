@@ -37,12 +37,6 @@
   <meta property="og:url" content="https://berkkan.de" />
   <meta property="og:type" content="website" />
 
-  <!-- umami analytics -->
-  <script
-    defer
-    src="http://45.84.196.21:47521/script.js"
-    data-website-id="ecaa704b-95fa-40c4-990e-ada4f2295be4"
-  ></script>
 </svelte:head>
 
 <main class={$themeColor}>
