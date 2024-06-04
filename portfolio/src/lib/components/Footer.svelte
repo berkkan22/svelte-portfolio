@@ -4,7 +4,7 @@
 
   import github_logo_light from "/images/github.png";
   import github_logo_dark from "/images/github-mark.png";
-  import gmail from "/images/gmail-icon.png";
+  import gmail from "/images/google-gmail.svg";
   import linkedIn from "/images/linkedin-icon.svg";
 
   let github_logo = github_logo_light;
