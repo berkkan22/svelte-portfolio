@@ -1,6 +1,7 @@
 <script lang="ts">
   import themeColor from "../lib/storeTheme";
   import "../app.css";
+  import { t } from "../lib/i10l/i10l";
 
   class Skill {
     name: string;
@@ -20,12 +21,12 @@
     new Skill("Python", "/images/skills/python.svg", "https://www.python.org/"),
     new Skill("GitHub Actions", "/images/skills/github-actions.svg", "https://github.com/features/actions"),
     new Skill("Docker", "/images/skills/docker-icon.svg", "https://www.docker.com/"),
-    new Skill("Svelte", "/images/skills/svelte.svg", "https://svelte.dev/"),
+    new Skill("Svelte", "/images/skills/svelte-icon.svg", "https://svelte.dev/"),
   ];
 </script>
 
 <div class="wrapper">
-  <h2>Skills</h2>
+  <h2>{$t("skills")}</h2>
   <div class="skills">
     {#each skills as skill}
       <a href={skill.officialLink} target="_blank">
@@ -67,7 +68,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: default;
+    /* cursor: default; */
   }
 
   .skill p {

@@ -2,11 +2,14 @@
   import ThemeIcon from "./theme_Icon.svelte";
   import "../../app.css";
   import themeColor from "../storeTheme";
+  import { t, locale, locales } from "../i10l/i10l";
+  import * as Flag from "svelte-flag-icons";
+  import translations from "../i10l/translations"; // replace with the actual path to your translation.ts file
 
   let menu: Record<string, string> = {
-    home: "Home",
-    "my-projects": "My Projects",
-    skills: "Skills",
+    home: $t("home"),
+    "my-projects": $t("my_projects"),
+    skills: $t("skills"),
     // education: "Education",
     // about: "More about me",
   };
@@ -29,9 +32,14 @@
   }
 
   let isShowMenu: boolean = false;
+  let isShowLanguages: boolean = false;
 
   function showMenu(): any {
     isShowMenu = !isShowMenu;
+  }
+
+  function openLanguageOption(): any {
+    isShowLanguages = !isShowLanguages;
   }
 
   function handleAnchorClick(event: any) {
@@ -43,6 +51,37 @@
       top: anchor ? anchor.offsetTop : 0,
       behavior: "smooth",
     });
+  }
+
+  function changeLanguage(l: string): any {
+    $locale = l;
+    isShowLanguages = false;
+    menu = {
+      home: $t("home"),
+      "my-projects": $t("my_projects"),
+      skills: $t("skills"),
+      // education: "Education",
+      // about: "More about me",
+    };
+  }
+
+  function clickOutside(element: HTMLDivElement, callbackFunction: { (): void; (): void }) {
+    function onClick(event: { target: any }) {
+      if (!element.contains(event.target)) {
+        callbackFunction();
+      }
+    }
+
+    document.body.addEventListener("click", onClick);
+
+    return {
+      update(newCallbackFunction: any) {
+        callbackFunction = newCallbackFunction;
+      },
+      destroy() {
+        document.body.removeEventListener("click", onClick);
+      },
+    };
   }
 </script>
 
@@ -70,13 +109,61 @@
       </label>
     </div>
     <ThemeIcon />
-  </div>
-  <div class="{isShowMenu ? 'menu-content' : 'dont-show-menu-content'} {$themeColor}">
-    {#each Object.keys(menu) as key}
-      <a class={$themeColor} href={"#" + key} class:active={activeLink === key} on:click={() => setActiveLink(key)}
-        >{menu[key]}</a
+    <div class="language-switcher">
+      <div
+        class="language-button {$themeColor} "
+        on:click={() => openLanguageOption()}
+        use:clickOutside={() => {
+          console.log("clicked outside");
+          isShowLanguages = false;
+        }}
       >
-    {/each}
+        <svelte:component this={Flag[$locale]} class="flag" size="24" />
+        <div class="arrow">
+          <svg
+            fill="#000000"
+            height="800px"
+            width="800px"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 330 330"
+            xml:space="preserve"
+          >
+            <path
+              id="XMLID_225_"
+              d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+	c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
+	s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="language-dropdown {isShowLanguages ? 'language-content' : 'dont-show-language-content'}">
+        {#each locales as l}
+          <div class="language-option" on:click={() => changeLanguage(l)}>
+            <svelte:component this={Flag[l]} class="flag" size="24" />
+            <span>{translations[l]["language"]}</span>
+          </div>
+        {/each}
+      </div>
+    </div>
+    <!-- <select bind:value={$locale}>
+        {#each locales as l}
+          <option value={l}>{l}</option>
+        {/each}
+      </select> -->
+    <!-- <svelte:component this={Flag["Us"]} />
+    <svelte:component this={Flag["De"]} /> -->
+
+    <div class="{isShowMenu ? 'menu-content' : 'dont-show-menu-content'} {$themeColor}">
+      {#each Object.keys(menu) as key}
+        <a class={$themeColor} href={"#" + key} class:active={activeLink === key} on:click={() => setActiveLink(key)}
+          >{menu[key]}</a
+        >
+      {/each}
+    </div>
   </div>
 </header>
 
@@ -244,6 +331,81 @@
     font-weight: bold;
   }
 
+  .language-switcher {
+    margin-left: 12px;
+    /* position: relative;
+    display: inline-block; */
+  }
+
+  .language-button {
+    background-color: var(--projects-card-background-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-top: -6px;
+  }
+
+  .language-button.dark {
+    background-color: var(--projects-card-background-dark);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  }
+
+  .flag {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+
+  .language-button .arrow {
+    margin-left: 8px;
+    margin-top: 4px;
+  }
+
+  .language-button .arrow svg {
+    fill: var(--text-color-light);
+    width: 15px;
+    height: 15px;
+  }
+
+  .language-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 24px;
+    background-color: var(--background-color-light);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 4px;
+    z-index: 1;
+  }
+
+  .dont-show-language-content {
+    display: none;
+  }
+
+  .language-option {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .language-option:hover {
+    background-color: var(--projects-card-background-light);
+  }
+
+  .language-option.dark {
+    background-color: var(--projects-card-background-dark);
+  }
+
+  .language-option span {
+    margin-left: 8px;
+  }
+
   @media (max-width: 800px) {
     .right > nav {
       display: none;
@@ -263,4 +425,56 @@
       transition: box-shadow 0.3s ease;
     }
   }
+
+  /* .language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .language-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .language-button .flag {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+
+  .language-button .arrow {
+    margin-left: 8px;
+  }
+
+  .language-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .language-option {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .language-option:hover {
+    background-color: #f0f0f0;
+  }
+
+  .language-option .flag {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  } */
 </style>

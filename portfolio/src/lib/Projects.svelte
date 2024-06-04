@@ -1,6 +1,7 @@
 <script lang="ts">
   import "../app.css";
   import themeColor from "./storeTheme";
+  import { t } from "./i10l/i10l";
 
   class Project {
     title: string;
@@ -45,95 +46,111 @@
     }
   }
 
-  let projects: Project[] = [
-    new Project(
-      "Pubspec dependency inspector",
-      "This is a VSCode extension that helps you to inspect the dependencies of your flutter project.",
-      [new Technology("TypeScript", "#2cceff", "#000000")],
-      "/images/projects/vscode-extension.png",
-      "Pubspec dependency inspector",
-      "--text-color-dark",
-      "https://marketplace.visualstudio.com/items?itemName=berkkan.pubspec-dependency-inspector",
-      "https://github.com/berkkan22/pubspec-dependency-inspector"
-    ),
-    new Project(
-      "WC Warteliste",
-      "This was a project which I did in my school for my school. It is an application to manage the waiting list for the restroom on the Abitur exams.",
-      [new Technology("JavaScript", "#FFFF00", "#000000"), new Technology("Electron", "#1B1C26", "#FFFFFF")],
-      "/images/projects/wc-warteliste.png",
-      "WC Warteliste",
-      "--text-color-light",
-      "",
-      "https://github.com/berkkan22/wc-warteliste"
-    ),
-    new Project(
-      "Bachelor Thesis - AVSS",
-      "This was my bachelor thesis. The goal of this thesis was to create a real-time preprocessing module for audio-visual speech separation. At the end I got a working model which can separate the speech from the background noise. But not as expected. Read more in the thesis.",
-      [new Technology("Python", "rgb(255 12 12)", "#FFFFFF")],
-      "",
-      "",
-      "--text-color-dark",
-      "",
-      "https://github.com/berkkan22/audio-visual-speech-separation"
-    ),
-    new Project(
-      "Website for Jugendtreff",
-      "This is a website for out local youth club. It is a simple website with a few pages.",
-      [new Technology("Svelte", "#FF3E00", "#FFFFFF")],
-      "/images/projects/jugendtreff.png",
-      "Jugendtreff",
-      "--text-color-light",
-      "https://gnc.berkkan.de",
-      ""
-    ),
-  ];
+  let projects: Project[] = [];
+
+  function onUpdateLanguage() {
+    projects = [
+      new Project(
+        "Pubspec dependency inspector",
+        $t("pubspec_description"),
+        [new Technology("TypeScript", "#2cceff", "#000000")],
+        "/images/projects/vscode-extension.png",
+        "Pubspec dependency inspector",
+        "--text-color-dark",
+        "https://marketplace.visualstudio.com/items?itemName=berkkan.pubspec-dependency-inspector",
+        "https://github.com/berkkan22/pubspec-dependency-inspector"
+      ),
+      new Project(
+        "WC Warteliste",
+        $t("wc_warteliste_description"),
+        [new Technology("JavaScript", "#FFFF00", "#000000"), new Technology("Electron", "#1B1C26", "#FFFFFF")],
+        "/images/projects/wc-warteliste.png",
+        "WC Warteliste",
+        "--text-color-light",
+        "",
+        "https://github.com/berkkan22/wc-warteliste"
+      ),
+      new Project(
+        "Bachelor Thesis - AVSS",
+        $t("bachelor_description"),
+        [new Technology("Python", "rgb(255 12 12)", "#FFFFFF")],
+        "",
+        "",
+        "--text-color-dark",
+        "",
+        "https://github.com/berkkan22/audio-visual-speech-separation"
+      ),
+      new Project(
+        "Website for Jugendtreff",
+        $t("genclik_website_description"),
+        [new Technology("Svelte", "#FF3E00", "#FFFFFF")],
+        "/images/projects/jugendtreff.png",
+        "Jugendtreff",
+        "--text-color-light",
+        "https://gnc.berkkan.de",
+        ""
+      ),
+    ];
+  }
+
+  $: $t, onUpdateLanguage();
 </script>
 
 <div class="wrapper">
-  <h2>My Projects</h2>
-  <div class={$themeColor} id="projects">
+  <h2>{$t("my_projects")}</h2>
+  <div class="{$themeColor} projects">
     {#each projects as project}
       <div class="project-card {$themeColor}">
-        {#if project.image && project.demoLink}
-          <a href={project.demoLink} target="_blank">
-            <div class="image">
+        <div class="content">
+          {#if project.image && project.demoLink}
+            <a href={project.demoLink} target="_blank">
+              <div class="image">
+                <img src={project.image} alt={project.imageAlt} />
+                {#if project.imageOverlayColor == "--text-color-dark"}
+                  <p style="color: var({project.imageOverlayColor})">{$t("view_demo")}</p>
+                {:else}
+                  <p class="dark" style="color: var({project.imageOverlayColor})">{$t("view_demo")}</p>
+                {/if}
+              </div>
+            </a>
+          {/if}
+          {#if project.image && !project.demoLink}
+            <div class="image no-demo">
               <img src={project.image} alt={project.imageAlt} />
-              {#if project.imageOverlayColor == "--text-color-dark"}
-                <p style="color: var({project.imageOverlayColor})">View Demo</p>
-              {:else}
-                <p class="dark" style="color: var({project.imageOverlayColor})">View Demo</p>
-              {/if}
             </div>
-          </a>
-        {/if}
-        {#if project.image && !project.demoLink}
-          <div class="image no-demo">
-            <img src={project.image} alt={project.imageAlt} />
+          {/if}
+          {#if !project.image}
+            <div class="no image">
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMjAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNjY2NjY2MiPjwvcmVjdD4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyNnB4IiBmaWxsPSIjMzMzMzMzIj5ObyBQcmV2aWV3PC90ZXh0PiAgIAo8L3N2Zz4="
+                alt={project.imageAlt}
+              />
+            </div>
+          {/if}
+          <h3 class="{$themeColor} title">{project.title}</h3>
+          {#if project.title.length > 24}
+            <!-- content here -->
+            <p class="{$themeColor} description short">{project.description}</p>
+          {:else}
+            <!-- else content here -->
+            <p class="{$themeColor} description">{project.description}</p>
+          {/if}
+          <div class="{$themeColor} technologies">
+            {#each project.technologies as tech}
+              <!-- <p style="background-color: {tech.color}">{tech.name}</p> -->
+              <p class={$themeColor} style="background-color: {tech.color}; color: {tech.txtColor};">{tech.name}</p>
+            {/each}
           </div>
-        {/if}
-        {#if !project.image}
-          <div class="no image">
-            <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMjAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCI+CiAgPHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNjY2NjY2MiPjwvcmVjdD4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIyNnB4IiBmaWxsPSIjMzMzMzMzIj5ObyBQcmV2aWV3PC90ZXh0PiAgIAo8L3N2Zz4="
-              alt={project.imageAlt}
-            />
-          </div>
-        {/if}
-        <h3 class={$themeColor} id="title">{project.title}</h3>
-        <p class={$themeColor} id="description">{project.description}</p>
-        <div id="technologies" class={$themeColor}>
-          {#each project.technologies as tech}
-            <!-- <p style="background-color: {tech.color}">{tech.name}</p> -->
-            <p class={$themeColor} style="background-color: {tech.color}; color: {tech.txtColor};">{tech.name}</p>
-          {/each}
         </div>
 
-        <div id="links">
+        <div class="links">
           {#if project.githubLink}
             <!-- <button> tes </button> -->
-            <a class={$themeColor} href={project.githubLink} target="_blank">View On GitHub</a>
+            <a class={$themeColor} href={project.githubLink} target="_blank">{$t("open_github")}</a>
           {:else}
-            <a class={$themeColor} href={project.githubLink} target="_blank" style="display: none;">View On GitHub</a>
+            <a class={$themeColor} href={project.githubLink} target="_blank" style="display: none;"
+              >{$t("open_github")}</a
+            >
           {/if}
         </div>
       </div>
@@ -154,7 +171,7 @@
     margin-bottom: 30px;
   }
 
-  #projects {
+  .projects {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -168,6 +185,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-self: center;
+    justify-content: space-between;
     background-color: var(--projects-card-background-light);
     color: var(--text-color-light);
     padding: 20px;
@@ -240,11 +258,11 @@
     filter: invert(0%);
   }
 
-  .project-card:hover p {
+  .project-card:hover .image p {
     display: block;
   }
 
-  #title {
+  .title {
     font-size: 20px;
     font-weight: bold;
     margin-top: 12px;
@@ -252,11 +270,11 @@
     color: var(--text-color-light);
   }
 
-  #title.dark {
+  .title.dark {
     color: var(--text-color-dark);
   }
 
-  #description {
+  .description {
     margin-bottom: 24px;
     line-height: 1.5;
     display: -webkit-box;
@@ -267,18 +285,22 @@
     color: var(--text-color-light);
   }
 
-  #description.dark {
+  .description.short {
+    -webkit-line-clamp: 3;
+  }
+
+  .description.dark {
     color: var(--text-color-dark);
   }
 
-  #technologies {
+  .technologies {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 16px;
     cursor: default;
   }
 
-  #technologies p {
+  .technologies p {
     margin-right: 10px;
     display: inline-block;
     border-radius: 20px;
@@ -291,12 +313,12 @@
     padding-right: 8px;
   }
 
-  #links {
+  .links {
     display: flex;
     justify-content: flex-end;
   }
 
-  #links a {
+  .links a {
     text-decoration: none;
     color: var(--text-color-light);
     border: 2px solid var(--primary-color-dark);
@@ -305,24 +327,24 @@
     background-color: var(--github-button-bg-color-light);
   }
 
-  #links a:hover {
+  .links a:hover {
     transform: scale(1.05);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  #links a.dark {
+  .links a.dark {
     color: var(--text-color-dark);
     background-color: var(--github-button-bg-color-dark);
   }
 
   @media (max-width: 1150px) {
-    #projects {
+    .projects {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 768px) {
-    #projects {
+    .projects {
       grid-template-columns: repeat(1, 1fr);
       gap: 1.5rem;
     }

@@ -4,10 +4,11 @@
   import berkkan from "/images/berkkan.jpeg";
   import github_logo_light from "/images/github.png";
   import github_logo_dark from "/images/github-mark.png";
-  import gmail from "/images/gmail-icon.png";
+  import gmail from "/images/google-gmail.svg";
   import linkedIn from "/images/linkedin-icon.svg";
   import themeColor from "./storeTheme";
   import "../app.css";
+  import { t } from "../lib/i10l/i10l";
 
   let github_logo = github_logo_light;
 
@@ -18,29 +19,28 @@
 
 <div id="hero">
   <div id="hero_left">
-    <h2>Hey I'm</h2>
-    <h1>Berkkan Katirci</h1>
+    <h2>{$t("hey")}</h2>
+    <h1>{$t("name")}</h1>
 
     <div class="profession">
-      and I'm a
+      {$t("working_sections")}
       {#if $themeColor === "dark"}
         <Typewriter mode="loop" --cursor-color="var(--primary-color-dark)" --cursor-width="4px">
-          <p>Frontend developer</p>
-          <p>Backend developer</p>
-          <p>Fullstack developer</p>
+          <p>{$t("frontend_developer")}</p>
+          <p>{$t("backend_developer")}</p>
+          <p>{$t("fullstack_developer")}</p>
         </Typewriter>
       {:else}
         <Typewriter mode="loop" --cursor-color="var(--primary-color-light)" --cursor-width="4px">
-          <p>Frontend developer</p>
-          <p>Backend developer</p>
-          <p>Fullstack developer</p>
+          <p>{$t("frontend_developer")}</p>
+          <p>{$t("backend_developer")}</p>
+          <p>{$t("fullstack_developer")}</p>
         </Typewriter>
       {/if}
     </div>
     <hr class={$themeColor} />
     <p>
-      I've been a coding enthusiast since my teens. Fluent in Flutter and Python, with a keen interest in Svelte. Beyond
-      coding, I enjoy video games, puzzles, and the thrill of escape rooms. Let's get to know each other!
+      {$t("short_description")}
     </p>
 
     <div class="wrapper">
