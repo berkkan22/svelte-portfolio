@@ -180,7 +180,7 @@
 
   .project-card {
     width: 300px;
-    height: 370px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
