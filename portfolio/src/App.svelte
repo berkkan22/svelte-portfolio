@@ -6,6 +6,17 @@
   import themeColor from "./lib/storeTheme";
   import Footer from "./lib/components/Footer.svelte";
   import "./app.css";
+  import { locale, getLocaleFromNavigator } from "./lib/i10l/i10l";
+
+  import * as CookieConsent from "vanilla-cookieconsent";
+  import CookieConsentComponent from "./lib/cookie/cookieconsent.svelte";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    const cookieContent = CookieConsent.getCookie();
+
+    $locale = getLocaleFromNavigator();
+  });
 </script>
 
 <svelte:head>
@@ -46,6 +57,8 @@
 </svelte:head>
 
 <main class={$themeColor}>
+  <!-- <CookieConsentComponent /> -->
+
   <Navigation />
 
   <section id="home">

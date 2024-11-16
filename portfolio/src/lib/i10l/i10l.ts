@@ -3,6 +3,7 @@ import translations from "./translations";
 
 export const locale = writable<string>("Us");
 export const locales = Object.keys(translations);
+export const fallbackLocale = "Us";
 
 function translate(locale, key, vars) {
   // Let's throw some errors if we're trying to use keys/locales that don't exist.
@@ -27,3 +28,13 @@ function translate(locale, key, vars) {
 export const t = derived(locale, ($locale) => (key, vars = {}) =>
   translate($locale, key, vars)
 );
+
+export function getLocaleFromNavigator() {
+  const locales = navigator.languages || navigator.language || fallbackLocale;
+
+  if (locales[0].toLowerCase().includes("en")) return "Us";
+  if (locales[0].toLowerCase().includes("de")) return "De";
+  if (locales[0].toLowerCase().includes("tr")) return "Tr";
+
+  return fallbackLocale;
+}

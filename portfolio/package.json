@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@sveltejs/adapter-static": "^3.0.1",
-    "svelte-typewriter": "^3.2.3"
+    "svelte-typewriter": "^3.2.3",
+    "vanilla-cookieconsent": "^3.0.1"
   }
 }
