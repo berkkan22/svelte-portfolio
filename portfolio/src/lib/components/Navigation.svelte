@@ -2,17 +2,24 @@
   import ThemeIcon from "./theme_Icon.svelte";
   import "../../app.css";
   import themeColor from "../storeTheme";
-  import { t, locale, locales } from "../i10l/i10l";
+  import { t, locale, locales, getLocaleFromNavigator } from "../i10l/i10l";
   import * as Flag from "svelte-flag-icons";
   import translations from "../i10l/translations"; // replace with the actual path to your translation.ts file
+  import { onMount } from "svelte";
 
-  let menu: Record<string, string> = {
-    home: $t("home"),
-    "my-projects": $t("my_projects"),
-    skills: $t("skills"),
-    // education: "Education",
-    // about: "More about me",
-  };
+  let menu: Record<string, string> = {};
+
+  onMount(() => {
+    $locale = getLocaleFromNavigator();
+
+    menu = {
+      home: $t("home"),
+      "my-projects": $t("my_projects"),
+      skills: $t("skills"),
+      // education: "Education",
+      // about: "More about me",
+    };
+  });
 
   let isTop: boolean = true;
 
